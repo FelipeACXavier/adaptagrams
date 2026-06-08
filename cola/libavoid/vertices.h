@@ -12,12 +12,12 @@
  * See the file LICENSE.LGPL distributed with the library.
  *
  * Licensees holding a valid commercial license may use this file in
- * accordance with the commercial license agreement provided with the 
+ * accordance with the commercial license agreement provided with the
  * library.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * Author(s):   Michael Wybrow
 */
@@ -33,6 +33,7 @@
 #include <cstdio>
 #include <utility>
 
+#include "libavoid/dllexport.h"
 #include "libavoid/geomtypes.h"
 
 namespace Avoid {
@@ -48,7 +49,7 @@ typedef unsigned int ConnDirFlags;
 typedef unsigned short VertIDProps;
 
 
-class VertID
+class AVOID_EXPORT VertID
 {
     public:
         unsigned int objID;
@@ -58,7 +59,7 @@ class VertID
 
         static const unsigned short src;
         static const unsigned short tar;
-        
+
         static const VertIDProps PROP_ConnPoint;
         static const VertIDProps PROP_OrthShapeEdge;
         static const VertIDProps PROP_ConnectionPin;
@@ -78,7 +79,7 @@ class VertID
         void print(FILE *file = stdout) const;
         void db_print(void) const;
         friend std::ostream& operator<<(std::ostream& os, const VertID& vID);
-        
+
         // Property tests:
         inline bool isOrthShapeEdge(void) const
         {
@@ -104,7 +105,7 @@ class VertID
 
 
 // An ID given to all dummy vertices inserted to allow creation of the
-// orthogonal visibility graph since the vertices in the orthogonal graph 
+// orthogonal visibility graph since the vertices in the orthogonal graph
 // mostly do not correspond to shape corners or connector endpoints.
 //
 static const VertID dummyOrthogID(0, 0);
@@ -157,7 +158,7 @@ class VertInf
         // The tree root and distance value used when computing MTSTs.
         // XXX: Maybe these should be allocated as a separate struct
         //      and referenced via a pointer.  This would be slower due
-        //      to memory allocation, but would save 2 x 8 = 24 bytes per 
+        //      to memory allocation, but would save 2 x 8 = 24 bytes per
         //      VertInf on 64-bit machines.
         VertInf *m_orthogonalPartner;
         VertInf **m_treeRoot;
@@ -166,7 +167,7 @@ class VertInf
         ConnDirFlags visDirections;
         std::list<ANode *> aStarDoneNodes;
         std::list<ANode *> aStarPendingNodes;
-        // Flags for orthogonal visibility properties, i.e., whether the 
+        // Flags for orthogonal visibility properties, i.e., whether the
         // line points to a shape edge, connection point or an obstacle.
         unsigned int orthogVisPropFlags;
 };
@@ -186,7 +187,7 @@ static const unsigned int YH_CONN = 128;
 bool directVis(VertInf *src, VertInf *dst);
 
 
-// A linked list of all the vertices in the router instance.  All the 
+// A linked list of all the vertices in the router instance.  All the
 // connector endpoints are listed first, then all the shape vertices.
 // Dummy vertices inserted for orthogonal routing are classed as shape
 // vertices but have VertID(0, 0).
@@ -222,5 +223,3 @@ typedef std::map<VertID, ShapeSet> ContainsMap;
 
 
 #endif
-
-

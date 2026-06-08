@@ -12,12 +12,12 @@
  * See the file LICENSE.LGPL distributed with the library.
  *
  * Licensees holding a valid commercial license may use this file in
- * accordance with the commercial license agreement provided with the 
+ * accordance with the commercial license agreement provided with the
  * library.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * Author(s):   Michael Wybrow
 */
@@ -27,7 +27,7 @@
 
 #define COLA_UNUSED(expr) do { (void)(expr); } while (0)
 
-#ifdef NDEBUG 
+#ifdef NDEBUG
 
   #define COLA_ASSERT(expr)  static_cast<void>(0)
 
@@ -39,7 +39,7 @@
     // Prevent inclusion of min and max macros.
     #define NOMINMAX
 
-    #include <afx.h>
+    #include <cassert>
     #define COLA_ASSERT(expr) ASSERT(expr)
 
   #elif defined(USE_ASSERT_EXCEPTIONS)
@@ -57,4 +57,3 @@
 
 
 #endif // AVOID_ASSERTIONS_H
-
