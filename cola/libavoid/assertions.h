@@ -32,17 +32,7 @@
   #define COLA_ASSERT(expr)  static_cast<void>(0)
 
 #else // Not NDEBUG
-
-  #ifdef _MSC_VER
-    // Compiling with Microsoft Visual C++ compiler
-
-    // Prevent inclusion of min and max macros.
-    #define NOMINMAX
-
-    #include <cassert>
-    #define COLA_ASSERT(expr) ASSERT(expr)
-
-  #elif defined(USE_ASSERT_EXCEPTIONS)
+  #if defined(USE_ASSERT_EXCEPTIONS)
 
     #include "libvpsc/assertions.h"
 
